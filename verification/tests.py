@@ -30,7 +30,7 @@ TESTS = {
     ],
     "Extra": [
         {
-            "input": "so sad das li",
+            "input": "so sad das-li",
             "answer": "sad das"
         },
         {
