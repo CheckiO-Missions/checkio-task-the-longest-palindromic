@@ -1,10 +1,28 @@
 <p>
-    Write a function that finds the longest palindromic substring of a given string. Try to be as efficient as possible!
+    Write a function that finds the longest <a href="https://en.wikipedia.org/wiki/Palindrome"
+target="_blank">palindromic</a> substring of a given string. Try to be as efficient as possible!
 </p>
 
 <p>
     If you find more than one substring you should return the one which is closer to the beginning.
 </p>
+
+<div class="for_info_only">
+  <p>
+    <strong>Examples:</strong>
+  </p>
+  {% if interpreter.slug == "js-node" %}
+<pre class="brush: python">longest_palindromic("artrartrt") == "rtrartr"
+    longest_palindromic("abacada") == "aba"
+    longest_palindromic("aaaa") == "aaaa"
+  </pre>
+{% else %}
+  <pre class="brush: python">longest_palindromic("artrartrt") == "rtrartr"
+    longest_palindromic("abacada") == "aba"
+    longest_palindromic("aaaa") == "aaaa"
+  </pre>
+{% endif %}
+</div>
 
 <p>
     <strong>Input: </strong> A text as a string.
