@@ -40,6 +40,16 @@ TESTS = {
         {
             "input": "1",
             "answer": "1"
+        },
+        {
+            "input": "123abcba",
+            "answer": "abcba",
+            "explanation": "At the end of text"
+        },
+        {
+            "input": "abcba123abcdcba",
+            "answer": "abcdcba",
+            "explanation": "Two palindromes in text"
         }
     ]
 }
