@@ -18,5 +18,5 @@ if (!global.is_checking) {
     assert.equal(longestPalindromic('aaaaa'), 'aaaaa');
 
     console.log("Coding complete? Click 'Check' to earn cool rewards!");
-}}
+}
     
