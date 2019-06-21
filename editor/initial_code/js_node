@@ -1,0 +1,22 @@
+"use strict";
+
+function longestPalindromic(a) {
+    // your code here
+    return undefined;
+}
+
+var assert = require('assert');
+
+if (!global.is_checking) {
+    console.log('Example:');
+    console.log(longestPalindromic('abc'));
+
+    // These "asserts" are used for self-checking
+    assert.equal(longestPalindromic('abc'), 'a');
+    assert.equal(longestPalindromic('abacada'), 'aba');
+    assert.equal(longestPalindromic('artrartrt'), 'rtrartr');
+    assert.equal(longestPalindromic('aaaaa'), 'aaaaa');
+
+    console.log("Coding complete? Click 'Check' to earn cool rewards!");
+}}
+    

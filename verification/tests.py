@@ -11,43 +11,43 @@ Each test is dict with
 TESTS = {
     "Basics": [
         {
-            "input": "abc",
+            "input": ["abc"],
             "answer": "a"
         },
         {
-            "input": "abacada",
+            "input": ["abacada"],
             "answer": "aba"
         },
         {
-            "input": "artrartrt",
+            "input": ["artrartrt"],
             "answer": "rtrartr"
         },
         {
-            "input": "aaaaa",
+            "input": ["aaaaa"],
             "answer": "aaaaa"
         }
 
     ],
     "Extra": [
         {
-            "input": "so sad das-li",
+            "input": ["so sad das-li"],
             "answer": "sad das"
         },
         {
-            "input": " a b c",
+            "input": [" a b c"],
             "answer": " a "
         },
         {
-            "input": "1",
+            "input": ["1"],
             "answer": "1"
         },
         {
-            "input": "123abcba",
+            "input": ["123abcba"],
             "answer": "abcba",
             "explanation": "At the end of text"
         },
         {
-            "input": "abcba123abcdcba",
+            "input": ["abcba123abcdcba"],
             "answer": "abcdcba",
             "explanation": "Two palindromes in text"
         }
