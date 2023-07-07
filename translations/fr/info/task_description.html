@@ -8,22 +8,18 @@
 </p>
 
 <p>
-    <strong>Input: </strong> Un texte - chaîne de carcatères (string).
+    <strong>Input:</strong> Un texte - chaîne de carcatères (string).
 </p>
 
 <p>
-    <strong>Output: </strong> La plus longue sous-chaîne qui soit un palindrome.
+    <strong>Output:</strong> La plus longue sous-chaîne qui soit un palindrome.
 </p>
 
-  {% if interpreter.slug == "js-node" %}
-<pre class="brush: javascript">longestPalindromic('abc') == 'a'
-longestPalindromic('abacada') == 'aba'
-</pre>
-{% else %}
-  <pre class="brush: python">longest_palindromic('abc') == 'a'
-longest_palindromic('abacada') == 'aba'
-</pre>
-{% endif %}
+<div class="for_info_only">
+  <p>
+    <strong>Examples:</strong>
+  </p>
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
 </div>
 
 <p>
