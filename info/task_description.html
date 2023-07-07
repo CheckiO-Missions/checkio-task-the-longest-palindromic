@@ -8,26 +8,18 @@ target="_blank">palindromic</a> substring of a given string. Try to be as effici
 </p>
 
 <p>
-    <strong>Input: </strong> A text as a string.
+    <strong>Input:</strong> A text as a string.
 </p>
 
 <p>
-    <strong>Output: </strong> The longest palindromic substring.
+    <strong>Output:</strong> The longest palindromic substring.
 </p>
 
 <div class="for_info_only">
   <p>
     <strong>Examples:</strong>
   </p>
-  {% if interpreter.slug == "js-node" %}
-<pre class="brush: javascript">longestPalindromic('abc') == 'a'
-longestPalindromic('abacada') == 'aba'
-</pre>
-{% else %}
-  <pre class="brush: python">longest_palindromic('abc') == 'a'
-longest_palindromic('abacada') == 'aba'
-</pre>
-{% endif %}
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
 </div>
 
 

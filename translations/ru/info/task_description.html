@@ -15,15 +15,7 @@
   <p>
     <strong>Примеры:</strong>
   </p>
-  {% if interpreter.slug == "js-node" %}
-<pre class="brush: javascript">longestPalindromic('abc') == 'a'
-longestPalindromic('abacada') == 'aba'
-</pre>
-{% else %}
-  <pre class="brush: python">longest_palindromic('abc') == 'a'
-longest_palindromic('abacada') == 'aba'
-</pre>
-{% endif %}
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
 </div>
 
 

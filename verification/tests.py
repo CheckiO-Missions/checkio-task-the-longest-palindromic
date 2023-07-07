@@ -25,8 +25,7 @@ TESTS = {
         {
             "input": ["aaaaa"],
             "answer": "aaaaa"
-        }
-
+        },
     ],
     "Extra": [
         {
@@ -50,6 +49,6 @@ TESTS = {
             "input": ["abcba123abcdcba"],
             "answer": "abcdcba",
             "explanation": "Two palindromes in text"
-        }
+        },
     ]
 }
