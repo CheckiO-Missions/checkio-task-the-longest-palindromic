@@ -1,0 +1,155 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        I have no idea how to start solving this mission.
+    </div>
+    <div class="answer">
+        <p>
+            Catch an idea 💡! Create two nested loops to iterate over indexes, one from the start of the given string <b class="code">a</b>, the other - from the end. Take a substring between these indexes and check if it's a palindrome. If so, compare with the predefined resulted string - if the length of current one is bigger, update the value of the resulted string and return it at the end of the function.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, what should I start from?
+    </div>
+    <div class="answer">
+        <p>
+            Let's calculate the length of the given string with <b class="code">len()</b> function and define a variable <b class="code">res</b> to keep the longest palindromic substring with the initial value of empty string.
+        </p>    
+        <pre class="brush: python">
+l = len(a)
+res = ""
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        What to do next?
+    </div>
+    <div class="answer">
+        <p>
+            Use <b class="code">for</b> loop to iterate over values of starting index, which may be any in the given string and the other loop to iterate over the values of ending index which may be the next after starting one (to include only a character with the starting index) till the next after length of the given text (to include only the last character).
+        </p>
+        <pre class="brush: python">
+for s in range(l):
+    ...
+    for e  in range(s + 1, l + 1):
+        ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Help me to proceed.
+    </div>
+    <div class="answer">
+        <p>
+            Let's think. If you already find some palindromic substring of length 5 (for example) and your starting index is already 3 characters from the end of the given string, you definitely will not find a longer palindrome. Use it to make your solution more efficient by comparing mentioned values and <b class="code">if</b> statement to break from the outer loop. 
+        </p>
+        <pre class="brush: python">
+for s in range(l):
+    if l - s <= len(res):
+        break
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        What to do with the indexes?
+    </div>
+    <div class="answer">
+        <p>
+            Inside inner loop find a substring using string <a target="_blank" href="https://www.w3schools.com/python/gloss_python_string_slice.asp">slicing</a> and current indexes.
+        </p>
+        <pre class="brush: python">
+subs = a[s:e]
+        </pre>
+        <p>
+            Now check if this string is palindromic (using reversed slicing of full string with negative step) and its length is bigger then of the resulted string.
+        </p>
+        <pre class="brush: python">
+if subs == subs[::-1] and len(subs) > len(res):
+    ...
+        </pre>
+        <p>If so, update the value of the resulted string.</p>
+        <pre class="brush: python">
+res = subs
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        So, how my final solution should look like?
+    </div>
+    <div class="answer">
+        <p>
+            You just need to join all previous hints, return the resulted string and wrap your code into function expression. Using type hints for input and output data are highly recommended.
+        </p>
+        <p>Here is the whole solution:</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(a: str) -> str:
+
+    l = len(a)
+    res = ""
+    for s in range(l):
+        if l - s <= len(res):
+            break
+        for e  in range(s + 1, l + 1):
+            subs = a[s:e]
+            if subs == subs[::-1] and len(subs) > len(res):
+                res = subs
+
+    return res
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Show me more solutions!<br />
+        'Cause I wanna be a real 🥇 Python Ninnjaa!
+    </div>
+    <div class="answer">
+        <p>Sure, grab it!</p>
+        <p>
+            Here is another approach: still double loop but one is for the length of the substring (from bigger, to make it efficient) and the other - for starting index. Then find substring and check if it's palindromic. If so, return it immediately. 
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(text):
+
+    s = len(text)
+    for size in range(s)[::-1]:
+        for index in range(s - size):
+            word = text[index:index + size + 1]
+            if word == word[::-1]:
+                return word
+        </pre>
+        </div>
+        <p>
+            Check all possible strings using recursion, by calling the same function for two strings without one border character, and take the longest palindromic.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(text):
+
+    if text == text[::-1]:
+        return text
+
+    return max(longest_palindromic(text[:-1]), longest_palindromic(text[1:]), key = len)
+        </pre>
+        </div>
+        <p>Click <b>Best Solutions</b> at mission menu and see a lot of other interesting solutions!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Thanks! I know and understand more now! Everything works fine!
+    </div>
+    <div class="answer">
+        Glad to hear it 👍!
+    </div>
+</div>
+</body>
