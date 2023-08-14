@@ -1,0 +1,155 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        Nie mam pojęcia, jak zacząć rozwiązywać tę misję.
+    </div>
+    <div class="answer">
+        <p>
+            Proszę złapać pomysł 💡! Proszę utworzyć dwie zagnieżdżone pętle iterujące po indeksach, jedną od początku podanego ciągu <b class="code">a</b>, drugą - od końca. Proszę wziąć podciąg pomiędzy tymi indeksami i sprawdzić, czy jest palindromem. Jeśli tak, proszę porównać z predefiniowanym ciągiem wynikowym - jeśli długość bieżącego ciągu jest większa, proszę zaktualizować wartość ciągu wynikowego i zwrócić ją na końcu funkcji.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, od czego powinienem zacząć?
+    </div>
+    <div class="answer">
+        <p>
+            Obliczmy długość podanego ciągu za pomocą funkcji <b class="code">len()</b> i zdefiniujmy zmienną <b class="code">res</b>, aby przechowywać najdłuższy podciąg palindromiczny z początkową wartością pustego ciągu.
+        </p>    
+        <pre class="brush: python">
+l = len(a)
+res = ""
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Co robić dalej?
+    </div>
+    <div class="answer">
+        <p>
+            Proszę użyć pętli <b class="code">for</b> do iteracji po wartościach indeksu początkowego, który może być dowolny w podanym ciągu, a drugiej pętli do iteracji po wartościach indeksu końcowego, który może być następny po początkowym (aby uwzględnić tylko znak o indeksie początkowym) do następnego po długości podanego tekstu (aby uwzględnić tylko ostatni znak).
+        </p>
+        <pre class="brush: python">
+for s in range(l):
+    ...
+    for e  in range(s + 1, l + 1):
+        ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Proszę mi pomóc.
+    </div>
+    <div class="answer">
+        <p>
+            Proszę się zastanowić. Jeśli znajdzie Pan już jakiś podciąg palindromiczny o długości 5 (na przykład), a indeks początkowy znajduje się już 3 znaki od końca podanego ciągu, to na pewno nie znajdzie Pan dłuższego palindromu. Proszę to wykorzystać, aby zwiększyć wydajność swojego rozwiązania, porównując wspomniane wartości i <b class="code">if</b>, aby przerwać zewnętrzną pętlę. 
+        </p>
+        <pre class="brush: python">
+for s in range(l):
+    if l - s <= len(res):
+        break
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Co zrobić z indeksami?
+    </div>
+    <div class="answer">
+        <p>
+            Wewnątrz wewnętrznej pętli proszę znaleźć podciąg przy użyciu ciągu <a target="_blank" href="https://www.w3schools.com/python/gloss_python_string_slice.asp">slicing</a> i bieżących indeksów.
+        </p>
+        <pre class="brush: python">
+subs = a[s:e]
+        </pre>
+        <p>
+            Teraz proszę sprawdzić, czy ten ciąg jest palindromiczny (używając odwróconego cięcia pełnego ciągu z ujemnym krokiem) i czy jego długość jest większa niż wynikowego ciągu.
+        </p>
+        <pre class="brush: python">
+if subs == subs[::-1] and len(subs)> len(res):
+    ...
+        </pre>
+        <p>Jeśli tak, proszę zaktualizować wartość wynikowego ciągu.</p>
+        <pre class="brush: python">
+res = subs
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Jak powinno wyglądać moje ostateczne rozwiązanie?
+    </div>
+    <div class="answer">
+        <p>
+            Wystarczy połączyć wszystkie poprzednie podpowiedzi, zwrócić wynikowy ciąg znaków i zawinąć kod w wyrażenie funkcyjne. Używanie podpowiedzi typu dla danych wejściowych i wyjściowych jest wysoce zalecane.
+        </p>
+        <p>Poniżej znajduje się całe rozwiązanie:</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(a: str) -> str:
+
+    l = len(a)
+    res = ""
+    for s in range(l):
+        if l - s <= len(res):
+            break
+        for e  in range(s + 1, l + 1):
+            subs = a[s:e]
+            if subs == subs[::-1] and len(subs)> len(res):
+                res = subs
+
+    return res
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Proszę pokazać mi więcej rozwiązań!<br />
+        bo chcę być prawdziwą 🥇 Python Ninnjaa!
+    </div>
+    <div class="answer">
+        <p>Jasne, proszę łapać!</p>
+        <p>
+            Oto inne podejście: nadal podwójna pętla, ale jedna jest dla długości podciągu (od większej, aby była wydajna), a druga - dla indeksu początkowego. Następnie proszę znaleźć podciąg i sprawdzić, czy jest palindromiczny. Jeśli tak, proszę go natychmiast zwrócić. 
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(text):
+
+    s = len(text)
+    for size in range(s)[::-1]:
+        for index in range(s - size):
+            word = text[index:index + size + 1]
+            if word == word[::-1]:
+                return word
+        </pre>
+        </div>
+        <p>
+            Proszę sprawdzić wszystkie możliwe ciągi za pomocą rekurencji, wywołując tę samą funkcję dla dwóch ciągów bez jednego znaku granicznego i wybrać najdłuższy palindromiczny.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(text):
+
+    if text == text[::-1]:
+        return text
+
+    return max(longest_palindromic(text[:-1]), longest_palindromic(text[1:]), key = len)
+        </pre>
+        </div>
+        <p>Proszę kliknąć <b>Best Solutions</b> w menu misji i zobaczyć wiele innych ciekawych rozwiązań!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Dzięki! Teraz wiem i rozumiem więcej! Wszystko działa jak należy!
+    </div>
+    <div class="answer">
+        Miło mi to słyszeć 👍!
+    </div>
+</div>
+</body>
