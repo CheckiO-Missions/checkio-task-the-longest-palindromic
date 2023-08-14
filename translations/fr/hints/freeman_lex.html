@@ -1,0 +1,155 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        Je n'ai aucune idée de la manière de commencer à résoudre cette mission.
+    </div>
+    <div class="answer">
+        <p>
+            Trouvez une idée 💡! Créez deux boucles imbriquées pour itérer sur les index, l'une à partir du début de la chaîne donnée <b class="code">a</b>, l'autre - à partir de la fin. Prenez une sous-chaîne entre ces index et vérifiez s'il s'agit d'un palindrome. Si c'est le cas, comparez avec la chaîne résultante prédéfinie - si la longueur de la chaîne actuelle est plus grande, mettez à jour la valeur de la chaîne résultante et renvoyez-la à la fin de la fonction.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, par quoi dois-je commencer?
+    </div>
+    <div class="answer">
+        <p>
+            Calculons la longueur de la chaîne donnée avec la fonction <b class="code">len()</b> et définissons une variable <b class="code">res</b> pour conserver la sous-chaîne palindromique la plus longue avec la valeur initiale de la chaîne vide.
+        </p>    
+        <pre class="brush: python">
+l = len(a)
+res = ""
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Que faire ensuite?
+    </div>
+    <div class="answer">
+        <p>
+            Utilisez la boucle <b class="code">for</b> pour itérer sur les valeurs de l'indice de départ, qui peut être n'importe lequel dans la chaîne donnée, et l'autre boucle pour itérer sur les valeurs de l'indice de fin, qui peut être le suivant de l'indice de départ (pour n'inclure qu'un caractère avec l'indice de départ) jusqu'au suivant de la longueur du texte donné (pour n'inclure que le dernier caractère).
+        </p>
+        <pre class="brush: python">
+for s in range(l):
+    ...
+    for e  in range(s + 1, l + 1):
+        ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Aidez-moi à procéder.
+    </div>
+    <div class="answer">
+        <p>
+            Réfléchissons. Si vous avez déjà trouvé une sous-chaîne palindromique de longueur 5 (par exemple) et que votre indice de départ est déjà à 3 caractères de la fin de la chaîne donnée, vous ne trouverez certainement pas un palindrome plus long. Utilisez-le pour rendre votre solution plus efficace en comparant les valeurs mentionnées et en utilisant l'instruction <b class="code">if</b> pour sortir de la boucle extérieure. 
+        </p>
+        <pre class="brush: python">
+for s in range(l):
+    if l - s <= len(res):
+        break
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Que faire des index?
+    </div>
+    <div class="answer">
+        <p>
+            Dans la boucle interne, trouvez une sous-chaîne en utilisant la chaîne <a target="_blank" href="https://www.w3schools.com/python/gloss_python_string_slice.asp">slicing</a> et les index actuels.
+        </p>
+        <pre class="brush: python">
+subs = a[s:e]
+        </pre>
+        <p>
+            Vérifiez maintenant si cette chaîne est palindromique (en utilisant le découpage inversé de la chaîne complète avec un pas négatif) et si sa longueur est supérieure à celle de la chaîne obtenue.
+        </p>
+        <pre class="brush: python">
+if subs == subs[::-1] and len(subs)> len(res):
+    ...
+        </pre>
+        <p>Si c'est le cas, mettez à jour la valeur de la chaîne obtenue.</p>
+        <pre class="brush: python">
+res = subs
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Alors, à quoi devrait ressembler ma solution finale?
+    </div>
+    <div class="answer">
+        <p>
+            Il vous suffit de joindre tous les indices précédents, de renvoyer la chaîne résultante et d'envelopper votre code dans une expression de fonction. Il est fortement recommandé d'utiliser des indices de type pour les données d'entrée et de sortie.
+        </p>
+        <p>Voici la solution complète:</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(a: str) -> str:
+
+    l = len(a)
+    res = ""
+    for s in range(l):
+        if l - s <= len(res):
+            break
+        for e  in range(s + 1, l + 1):
+            subs = a[s:e]
+            if subs == subs[::-1] and len(subs)> len(res):
+                res = subs
+
+    return res
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Montrez-moi d'autres solutions!<br />
+        parce que je veux être une vraie 🥇 Python Ninnjaa!
+    </div>
+    <div class="answer">
+        <p>Bien sûr, prenez-le!</p>
+        <p>
+            Voici une autre approche: toujours une double boucle mais l'une est pour la longueur de la sous-chaîne (de plus grande, pour la rendre efficace) et l'autre - pour l'index de départ. Ensuite, trouvez la sous-chaîne et vérifiez si elle est palindromique. Si c'est le cas, renvoyez-la immédiatement. 
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(text):
+
+    s = len(text)
+    for size in range(s)[::-1]:
+        for index in range(s - size):
+            word = text[index:index + size + 1]
+            if word == word[::-1]:
+                return word
+        </pre>
+        </div>
+        <p>
+            Vérifiez toutes les chaînes possibles en utilisant la récursivité, en appelant la même fonction pour deux chaînes sans caractère de bordure, et prenez le palindromique le plus long.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(text):
+
+    if text == text[::-1]:
+        return text
+
+    return max(longest_palindromic(text[:-1]), longest_palindromic(text[1:]), key = len)
+        </pre>
+        </div>
+        <p>Cliquez sur <b>Best Solutions</b> dans le menu mission et découvrez de nombreuses autres solutions intéressantes!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Merci beaucoup! Je sais et je comprends mieux maintenant! Tout fonctionne bien!
+    </div>
+    <div class="answer">
+        Heureux de l'apprendre 👍!
+    </div>
+</div>
+</body>
