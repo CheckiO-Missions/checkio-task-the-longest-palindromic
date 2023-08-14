@@ -1,0 +1,155 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        我不知道如何开始解决这个任务。
+    </div>
+    <div class="answer">
+        <p>
+            给你个建议💡！创建两个嵌套循环来遍历索引，一个从给定字符串<b class="code">a</b> 的起点开始，另一个从终点开始。在这些索引之间取一个子串，检查它是否是回文。如果是，则与预定义的结果字符串进行比较--如果当前字符串的长度更大，则更新结果字符串的值，并在函数结束时返回。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        好吧，我应该从哪里开始呢？
+    </div>
+    <div class="answer">
+        <p>
+            让我们用<b class="code">len()</b> 函数计算给定字符串的长度，并定义一个变量<b class="code">res</b> 来保留最长的回文子串，其初始值为空字符串。
+        </p>    
+        <pre class="brush: python">
+l = len(a)
+res = ""
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        接下来要做什么？
+    </div>
+    <div class="answer">
+        <p>
+            使用<b class="code">for</b> 循环遍历起始索引的值，起始索引可以是给定字符串中的任意值，另一个循环遍历结束索引的值，结束索引可以是起始索引后的下一个值（只包括起始索引的字符），也可以是给定文本长度后的下一个值（只包括最后一个字符）。
+        </p>
+        <pre class="brush: python">
+for s in range(l):
+    ...
+    for e  in range(s + 1, l + 1):
+        ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        请帮助我继续。
+    </div>
+    <div class="answer">
+        <p>
+            让我们想一想。如果你已经找到了长度为 5 的某个回文子串（例如），而你的起始索引距离给定字符串的末尾已经有 3 个字符，那么你肯定找不到更长的回文。通过比较提到的值和<b class="code">if</b> 语句来中断外循环，从而提高解决方案的效率。 
+        </p>
+        <pre class="brush: python">
+for s in range(l):
+    if l - s <= len(res):
+        break
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        如何处理索引？
+    </div>
+    <div class="answer">
+        <p>
+            在内循环中，使用字符串<a target="_blank" href="https://www.w3schools.com/python/gloss_python_string_slice.asp">slicing</a> 和当前索引查找子串。
+        </p>
+        <pre class="brush: python">
+subs = a[s:e]
+        </pre>
+        <p>
+            现在检查该字符串是否为回文字符串（使用负步长对全字符串进行反向切分），其长度是否大于结果字符串的长度。
+        </p>
+        <pre class="brush: python">
+if subs == subs[::-1] and len(subs)> len(res):
+    ...
+        </pre>
+        <p>如果是，则更新结果字符串的值。</p>
+        <pre class="brush: python">
+res = subs
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        那么，我的最终解决方案应该是怎样的呢？
+    </div>
+    <div class="answer">
+        <p>
+            您只需将之前的所有提示连接起来，返回结果字符串，然后将代码封装为函数表达式即可。强烈建议对输入和输出数据使用类型提示。
+        </p>
+        <p>下面是整个解决方案：</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(a: str) -> str:
+
+    l = len(a)
+    res = ""
+    for s in range(l):
+        if l - s <= len(res):
+            break
+        for e  in range(s + 1, l + 1):
+            subs = a[s:e]
+            if subs == subs[::-1] and len(subs)> len(res):
+                res = subs
+
+    return res
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        告诉我更多解决方案！<br />
+        因为我想成为一个真正的 🥇 Python Ninnjaa！
+    </div>
+    <div class="answer">
+        <p>当然，抓紧时间！</p>
+        <p>
+            下面是另一种方法：仍然是双循环，但一个循环用于计算子串的长度（从大到小，以提高效率），另一个循环用于计算起始索引。然后找到子串，检查它是否是回文。如果是，则立即返回。 
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(text):
+
+    s = len(text)
+    for size in range(s)[::-1]:
+        for index in range(s - size):
+            word = text[index:index + size + 1]
+            if word == word[::-1]:
+                return word
+        </pre>
+        </div>
+        <p>
+            使用递归方法检查所有可能的字符串，对没有一个边界字符的两个字符串调用相同的函数，取最长的回文字符串。
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(text):
+
+    if text == text[::-1]:
+        return text
+
+    return max(longest_palindromic(text[:-1]), longest_palindromic(text[1:]), key = len)
+        </pre>
+        </div>
+        <p>点击任务菜单<b>Best Solutions</b> ，查看更多其他有趣的解决方案！</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        谢谢！我现在知道并理解得更多了！一切正常！
+    </div>
+    <div class="answer">
+        很高兴听到这个消息 👍！
+    </div>
+</div>
+</body>
