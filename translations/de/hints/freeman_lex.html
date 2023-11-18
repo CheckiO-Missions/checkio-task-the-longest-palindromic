@@ -1,0 +1,155 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        Ich habe keine Ahnung, wie ich mit der Lösung dieser Aufgabe beginnen soll.
+    </div>
+    <div class="answer">
+        <p>
+            Fangen Sie eine Idee 💡! Erstellen Sie zwei verschachtelte Schleifen, um über Indizes zu iterieren, eine vom Anfang der gegebenen Zeichenkette <b class="code">a</b>, die andere - vom Ende. Nehmen Sie eine Teilzeichenkette zwischen diesen Indizes und prüfen Sie, ob sie ein Palindrom ist. Wenn ja, vergleichen Sie sie mit der vordefinierten resultierenden Zeichenkette. Wenn die Länge der aktuellen Zeichenkette größer ist, aktualisieren Sie den Wert der resultierenden Zeichenkette und geben ihn am Ende der Funktion zurück.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, womit soll ich beginnen?
+    </div>
+    <div class="answer">
+        <p>
+            Lassen Sie uns die Länge der gegebenen Zeichenkette mit der Funktion <b class="code">len()</b> berechnen und eine Variable <b class="code">res</b> definieren, um die längste palindromische Teilzeichenkette mit dem Anfangswert der leeren Zeichenkette zu speichern.
+        </p>    
+        <pre class="brush: python">
+l = len(a)
+res = ""
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Was ist als nächstes zu tun?
+    </div>
+    <div class="answer">
+        <p>
+            Verwenden Sie die Schleife <b class="code">for</b>, um über die Werte des Startindexes zu iterieren, der in der gegebenen Zeichenkette beliebig sein kann, und die andere Schleife, um über die Werte des Endindexes zu iterieren, der der nächste nach dem Startindex sein kann (um nur ein Zeichen mit dem Startindex einzuschließen) bis zum nächsten nach der Länge des gegebenen Textes (um nur das letzte Zeichen einzuschließen).
+        </p>
+        <pre class="brush: python">
+for s in range(l):
+    ...
+    for e  in range(s + 1, l + 1):
+        ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Helfen Sie mir weiter.
+    </div>
+    <div class="answer">
+        <p>
+            Lassen Sie uns nachdenken. Wenn Sie bereits eine palindromische Teilzeichenkette der Länge 5 (zum Beispiel) gefunden haben und Ihr Startindex bereits 3 Zeichen vom Ende der gegebenen Zeichenkette entfernt ist, werden Sie definitiv kein längeres Palindrom finden. Nutzen Sie dies, um Ihre Lösung effizienter zu machen, indem Sie die genannten Werte vergleichen und die Anweisung <b class="code">if</b> verwenden, um die äußere Schleife zu verlassen. 
+        </p>
+        <pre class="brush: python">
+for s in range(l):
+    if l - s <= len(res):
+        break
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Was tun Sie mit den Indizes?
+    </div>
+    <div class="answer">
+        <p>
+            Suchen Sie in der inneren Schleife eine Teilzeichenkette mit Hilfe der Zeichenkette <a target="_blank" href="https://www.w3schools.com/python/gloss_python_string_slice.asp">slicing</a> und den aktuellen Indizes.
+        </p>
+        <pre class="brush: python">
+subs = a[s:e]
+        </pre>
+        <p>
+            Prüfen Sie nun, ob diese Zeichenkette palindromisch ist (durch umgekehrte Zerlegung der vollständigen Zeichenkette mit negativem Schritt) und ihre Länge größer ist als die der resultierenden Zeichenkette.
+        </p>
+        <pre class="brush: python">
+if subs == subs[::-1] and len(subs)> len(res):
+    ...
+        </pre>
+        <p>Wenn ja, aktualisieren Sie den Wert der resultierenden Zeichenfolge.</p>
+        <pre class="brush: python">
+res = subs
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Wie sollte also meine endgültige Lösung aussehen?
+    </div>
+    <div class="answer">
+        <p>
+            Sie müssen nur alle vorherigen Hinweise kombinieren, die resultierende Zeichenkette zurückgeben und Ihren Code in einen Funktionsausdruck verpacken. Die Verwendung von Typ-Hinweisen für Eingabe- und Ausgabedaten wird dringend empfohlen.
+        </p>
+        <p>Hier ist die gesamte Lösung:</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(a: str) -> str:
+
+    l = len(a)
+    res = ""
+    for s in range(l):
+        if l - s <= len(res):
+            break
+        for e  in range(s + 1, l + 1):
+            subs = a[s:e]
+            if subs == subs[::-1] and len(subs)> len(res):
+                res = subs
+
+    return res
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Zeigen Sie mir mehr Lösungen!<br />
+        denn ich möchte ein echter 🥇 Python Ninnjaa sein!
+    </div>
+    <div class="answer">
+        <p>Klar, schnapp sie dir!</p>
+        <p>
+            Hier ist ein anderer Ansatz: immer noch eine Doppelschleife, aber eine für die Länge der Teilzeichenkette (von größer, um es effizienter zu machen) und die andere - für den Startindex. Dann finden Sie die Teilzeichenkette und prüfen, ob sie palindromisch ist. Wenn ja, geben Sie sie sofort zurück. 
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(text):
+
+    s = len(text)
+    for size in range(s)[::-1]:
+        for index in range(s - size):
+            word = text[index:index + size + 1]
+            if word == word[::-1]:
+                return word
+        </pre>
+        </div>
+        <p>
+            Prüfen Sie alle möglichen Zeichenketten mit Hilfe einer Rekursion, indem Sie die gleiche Funktion für zwei Zeichenketten ohne ein Randzeichen aufrufen und die längste palindromische Zeichenkette nehmen.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def longest_palindromic(text):
+
+    if text == text[::-1]:
+        return text
+
+    return max(longest_palindromic(text[:-1]), longest_palindromic(text[1:]), key = len)
+        </pre>
+        </div>
+        <p>Klicken Sie im Missionsmenü auf <b>Best Solutions</b> und sehen Sie sich viele weitere interessante Lösungen an!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Vielen Dank! Ich weiß und verstehe jetzt mehr! Alles funktioniert bestens!
+    </div>
+    <div class="answer">
+        Freut mich zu hören 👍!
+    </div>
+</div>
+</body>
